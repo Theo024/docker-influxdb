@@ -12,6 +12,9 @@ on:
 
   # Run tests for any PRs.
   pull_request:
+  
+  schedule:
+    - cron:  '0 2 * * 1'
 
 env:
   IMAGE_NAME: influxdb
@@ -41,7 +44,7 @@ jobs:
     needs: test
 
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'schedule'
 
     steps:
       - uses: actions/checkout@v2
